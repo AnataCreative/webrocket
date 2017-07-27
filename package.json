@@ -11,7 +11,7 @@
 	"files": [
 		"generators"
 	],
-	"main": "generators/index.js",
+	"main": "generators/app/index.js",
 	"keywords": [
 		"webrocket",
 		"startkit",
@@ -33,8 +33,8 @@
 		"jest-cli": "^20.0.0"
 	},
 	"dependencies": {
-		"yeoman-generator": "^1.0.0",
-		"chalk": "^1.1.3",
+		"yeoman-generator": "^1.1.1",
+		"chalk": "^2.0.1",
 		"yosay": "^2.0.0"
 	},
 	"jest": {

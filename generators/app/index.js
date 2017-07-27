@@ -3,8 +3,6 @@
 const Generator = require('yeoman-generator');
 const yosay = require('yosay');
 const chalk = require('chalk');
-// const wiredep = require('wiredep');
-// const mkdirp = require('mkdirp');
 
 
 module.exports = class extends Generator {
