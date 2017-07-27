@@ -18,12 +18,12 @@ yo webrocket
 
 ## License
 
-MIT © [Ibe Vanmeenen](ibevanmeenen.me)
+MIT © [Anata Creative](https://anatacreative.com/)
 
 
-[npm-image]: https://badge.fury.io/js/generator-webstarters.svg
-[npm-url]: https://npmjs.org/package/generator-webstarters
-[travis-image]: https://travis-ci.org/IbeVanmeenen/generator-webstarters.svg?branch=master
-[travis-url]: https://travis-ci.org/IbeVanmeenen/generator-webstarters
-[daviddm-image]: https://david-dm.org/IbeVanmeenen/generator-webstarters.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/IbeVanmeenen/generator-webstarters
+[npm-image]: https://badge.fury.io/js/generator-webrocket.svg
+[npm-url]: https://npmjs.org/package/generator-webrocket
+[travis-image]: https://travis-ci.org/IbeVanmeenen/generator-webrocket.svg?branch=master
+[travis-url]: https://travis-ci.org/IbeVanmeenen/generator-webrocket
+[daviddm-image]: https://david-dm.org/IbeVanmeenen/generator-webrocket.svg?theme=shields.io
+[daviddm-url]: https://david-dm.org/IbeVanmeenen/generator-webrocket
