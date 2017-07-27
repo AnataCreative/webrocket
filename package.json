@@ -2,56 +2,47 @@
 	"name": "generator-webrocket",
 	"version": "0.0.1",
 	"description": "Webrocket by @AnataCreative",
-	"homepage": "",
+	"license": "MIT",
+	"repository": "AnataCreative/webrocket",
 	"author": {
 		"name": "Ibe Vanmeenen",
 		"email": "info@anatacreative.com",
 		"url": "anatacreative.com"
 	},
+	"main": "generators/app/index.js",
+	"engines": {
+		"node": ">=4"
+	},
+	"scripts": {
+		"test": "mocha --reporter spec --timeout 3000"
+	},
 	"files": [
 		"generators"
 	],
-	"main": "generators/app/index.js",
 	"keywords": [
+		"yeoman-generator",
 		"webrocket",
-		"startkit",
+		"web",
+		"app",
 		"gulp",
 		"webpack",
 		"scss",
 		"css",
 		"javascript",
-		"frontend",
-		"yeoman-generator"
+		"front-end"
 	],
-	"devDependencies": {
-		"yeoman-test": "^1.6.0",
-		"yeoman-assert": "^3.0.0",
-		"nsp": "^2.6.3",
-		"eslint": "^4.1.0",
-		"eslint-config-xo-space": "^0.16.0",
-		"jest": "^19.0.2",
-		"jest-cli": "^20.0.0"
+	"scripts": {
+		"test": "mocha --reporter spec --timeout 3000"
 	},
 	"dependencies": {
 		"yeoman-generator": "^1.1.1",
 		"chalk": "^2.0.1",
-		"yosay": "^2.0.0"
+		"yosay": "^2.0.0",
+		"generator-mocha": "^1.0.0"
 	},
-	"jest": {
-		"testEnvironment": "node"
-	},
-	"scripts": {
-		"prepublish": "nsp check",
-		"pretest": "eslint . --fix",
-		"test": "jest"
-	},
-	"eslintConfig": {
-		"extends": "xo-space",
-		"env": {
-			"jest": true,
-			"node": true
-		}
-	},
-	"repository": "AnataCreative/webrocket",
-	"license": "MIT"
+	"devDependencies": {
+		"mocha": "^3.1.0",
+		"yeoman-assert": "^3.0.0",
+		"yeoman-test": "^1.6.0"
+	}
 }

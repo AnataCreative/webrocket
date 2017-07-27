@@ -43,6 +43,7 @@
 		">1%"
 	],
 	"scripts": {
-		"dev": "gulp --require babel-register --gulpfile tasks"
+		"dev": "gulp --require babel-register --gulpfile tasks",
+		"build": "gulp --require babel-register --gulpfile tasks build"
 	}
 }

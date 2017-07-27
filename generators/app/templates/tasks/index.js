@@ -1,5 +1,4 @@
 import gulp from 'gulp';
-import runSequence from 'run-sequence';
 
 import clean from './clean';
 import styles from './styles';
