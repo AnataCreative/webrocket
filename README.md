@@ -1,5 +1,5 @@
-# Webrocket [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
-> Webstarter by @AnataCreative
+# Webrocket 🚀 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url]
+> Yo web generator by @AnataCreative
 
 ## Installation
 
