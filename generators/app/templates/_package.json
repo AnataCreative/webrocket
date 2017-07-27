@@ -1,9 +1,7 @@
 {
 	"name": "<%= appName %>",
 	"version": "1.0.0",
-	"dependencies": {
-
-	},
+	"dependencies": {},
 	"devDependencies": {
 		"gulp": "github:gulpjs/gulp#4.0",
 		"gulp-changed": "~2.0",
@@ -44,6 +42,6 @@
 	],
 	"scripts": {
 		"dev": "gulp --require babel-register --gulpfile tasks",
-		"build": "gulp --require babel-register --gulpfile tasks build"
+		"build": "gulp --require babel-register --gulpfile tasks build --production"
 	}
 }

@@ -25,38 +25,43 @@ const sourceFiles = path.join(config.root.dev, config.styles.dev) + config.style
 const distPath = path.join(config.root.dist, config.styles.dist);
 
 
-const styles = (done) => {
+export const styles = (done) => {
 
-    return gulp.src(sourceFiles)
-        // Start Plumber
-        .pipe(plumber())
+	return gulp.src(sourceFiles)
+		// Start Plumber
+		.pipe(plumber())
 
-        // Sass
-        .pipe(sass())
+		// Sass
+		.pipe(sass())
 
-        // Post CSS (prefix, combine all mediaqueries and minify)
-        .pipe(postcss(postCssProcessors))
+		// Post CSS (prefix, combine all mediaqueries and minify)
+		.pipe(postcss(postCssProcessors))
 
-        // Rename the file to respect naming covention.
-        .pipe(rename((path) => {
-            path.basename += '.min';
-        }))
+		// Rename the file to respect naming covention.
+		.pipe(rename((path) => {
+			path.basename += '.min';
+		}))
 
-        // Stop Plumber
-        .pipe(plumber.stop())
+		// Stop Plumber
+		.pipe(plumber.stop())
 
-        // Write to output
-        .pipe(gulp.dest(distPath))
+		// Write to output
+		.pipe(gulp.dest(distPath))
 
-        // Show total size of css
-        .pipe(size({
-            title: 'css'
-        }))
+		// Show total size of css
+		.pipe(size({
+			title: 'css'
+		}))
 
-        // Reload
-        .pipe(browserSync.reload({
-            stream: true
-        }));
+		// Reload
+		.pipe(browserSync.reload({
+			stream: true
+		}));
+};
+
+
+export const watch = () => {
+	gulp.watch(sourceFiles, gulp.series(styles));
 };
 
 

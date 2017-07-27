@@ -1,31 +1,31 @@
 {
-    "root": {
-        "dev": "<%= devFolderPath %>",
-        "dist": "<%= distFolderPath %>"
-    },
-    "javascript": {
-        "dev": "js",
-        "dist": "assets/js",
-        "extensions": [".json", ".js"]
-    },
-    "styles": {
-        "dev": "scss/**/*",
-        "dist": "assets/css",
-        "extensions": ".scss"
-    },
-    "images": {
-        "dev": "img/**/*",
-        "dist": "assets/img",
-        "extensions": ".(jpg|png|svg|gif)"
-    },
-    "html": {
-        "dev": "html/**/*",
-        "dist": "./",
-        "extensions": ".html"
-    }<% if (hasStyleguide) { %>,
-    "styleguide": {
-        "dev": "styleguide",
-        "dist": "assets/styleguide",
-        "extensions": ".(html,json,md,yml)"
-    }<% } %>
+	"root": {
+		"dev": "<%= devFolderPath %>",
+		"dist": "<%= distFolderPath %>"
+	},
+	"javascript": {
+		"dev": "js",
+		"dist": "assets/js",
+		"extensions": [".json", ".js"]
+	},
+	"styles": {
+		"dev": "scss/**/*",
+		"dist": "assets/css",
+		"extensions": ".scss"
+	},
+	"images": {
+		"dev": "img/**/*",
+		"dist": "assets/img",
+		"extensions": ".(jpg|png|svg|gif)"
+	},
+	"html": {
+		"dev": "html/**/*",
+		"dist": "./",
+		"extensions": ".html"
+	}<% if (hasStyleguide) { %>,
+	"styleguide": {
+		"dev": "styleguide",
+		"dist": "assets/styleguide",
+		"extensions": ".(html,json,md,yml)"
+	}<% } %>
 }

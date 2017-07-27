@@ -17,30 +17,34 @@ import webpackConfig from './config/webpack';
 
 const compiler = webpack(webpackConfig);
 const serverConfig = {
-    port: 8080,
-    ui: {
-        port: 8081
-    },
-    server: {
-        baseDir: config.root.dist,
-    },
-    tunnel: false
+	port: 8080,
+	ui: {
+		port: 8081
+	},
+	server: {
+		baseDir: config.root.dist,
+	},
+	tunnel: false
 };
 
 if (!isProduction()) {
-    serverConfig.middleware = [
-        webpackDevMiddleware(compiler, {
-            noInfo: true,
-            publicPath: path.join('/', webpackConfig.output.publicPath),
-            stats: 'errors-only'
-        }),
-        webpackHotMiddleware(compiler)
-    ];
+	serverConfig.middleware = [
+		webpackDevMiddleware(compiler, {
+			noInfo: true,
+			publicPath: path.join('/', webpackConfig.output.publicPath),
+			stats: 'errors-only'
+		}),
+		webpackHotMiddleware(compiler)
+	];
 }
 
 
-const server = () => {
-    browserSync.init(serverConfig);
+export const server = () => {
+
+	return new Promise((resolve) => {
+		browserSync.init(serverConfig);
+		resolve();
+	});
 };
 
 

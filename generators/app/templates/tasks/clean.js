@@ -8,11 +8,11 @@ import del from 'del';
 import config from './config/general';
 
 
-const clean = () => {
+export const clean = () => {
 
-    return del(config.root.dist, {
-        force: true
-    });
+	return del(config.root.dist, {
+		force: true
+	});
 };
 
 

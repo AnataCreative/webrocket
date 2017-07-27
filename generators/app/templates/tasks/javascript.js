@@ -10,24 +10,24 @@ import webpackConfig from './config/webpack';
 import {errorLogger, infoLogger} from './helpers/logger';
 
 
-const javascript = (callback) => {
-    webpack(webpackConfig, (err, stats) => {
-        if (err) {
-            errorLogger('Webpack', err);
-        }
+export const javascript = (callback) => {
+	webpack(webpackConfig, (err, stats) => {
+		if (err) {
+			errorLogger('Webpack', err);
+		}
 
-        infoLogger('Webpack', stats.toString({
-            assets: true,
-            chunks: false,
-            chunkModules: false,
-            colors: true,
-            hash: false,
-            timings: true,
-            version: false
-        }));
+		infoLogger('Webpack', stats.toString({
+			assets: true,
+			chunks: false,
+			chunkModules: false,
+			colors: true,
+			hash: false,
+			timings: true,
+			version: false
+		}));
 
-        callback();
-    });
+		callback();
+	});
 };
 
 

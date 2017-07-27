@@ -7,15 +7,16 @@ import path from 'path';
 
 import config from './config/general';
 
+import {watch as styles} from './styles';
+import {watch as images} from './images';
+import {watch as html} from './html';<% if (hasStyleguide) { %>
+import {watch as styleguide} from './styleguide';<% } %>
 
-const watch = () => {
-    const tasks = ['css', 'img'];
-    let sourceFiles = [];
-
-    for (task of tasks) {
-        const watchFiles = path.join(config.root.dev, config[task].dev) + config[task].extensions;
-        gulp.watch(watchFiles, task);
-    }
+export const watch = () => {
+	styles();
+	images();
+	html();<% if (hasStyleguide) { %>
+	styleguide();<% } %>
 };
 
 
