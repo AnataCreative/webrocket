@@ -14,16 +14,14 @@ const sourcePath = path.resolve(config.root.dev, config.javascript.dev);
 const distPath = path.resolve(config.root.dist, config.javascript.dist);
 
 
-const plugins = [];
-
-
-plugins.push(new webpack.NoEmitOnErrorsPlugin());
-
-plugins.push(new webpack.optimize.CommonsChunkPlugin({
-	name: 'vendor',
-	filename: 'vendors.min.js'
-}));
-
+// Plugins
+const plugins = [
+	new webpack.NoEmitOnErrorsPlugin(),
+	new webpack.optimize.CommonsChunkPlugin({
+		name: 'vendor',
+		filename: 'vendors.min.js'
+	})
+];
 
 if (isProduction()) {
 	plugins.push(
@@ -31,33 +29,50 @@ if (isProduction()) {
 			compress: {
 				warnings: false
 			}
-		}),
-		new webpack.NoEmitOnErrorsPlugin()
+		})
 	);
 } else {
 	plugins.push(new webpack.HotModuleReplacementPlugin());
 }
 
 
+// Rules
+const rules = [{
+	test: /\.js$/,
+	exclude: path.resolve(config.root.npm, 'node_modules/'),
+	loaders: 'babel-loader',
+	options: {
+		presets: [['es2015', {
+			modules: false
+		}]]
+	}
+}];
+
+if (!isProduction()) {
+	rules.push({
+		test: /\.js$/,
+		exclude: path.resolve(config.root.npm, 'node_modules/'),
+		loaders: 'webpack-module-hot-accept'
+	});
+}
+
+
+// Entry
+const entry = [
+	path.resolve(config.root.dev, './js/app.js')
+];
+
+if (!isProduction()) {
+	entry.push('webpack-hot-middleware/client?reload=true');
+}
+
+
+// Set Config
 const webpackConfig = {
-	cache: true,
-	context: sourcePath,
-	entry: {
-		app: './app.js',
-	},
+	cache: false,
+	entry: entry,
 	module: {
-		rules: [
-			{
-				test: /\.js$/,
-				exclude: path.resolve(__dirname, 'node_modules/'),
-				loader: 'babel-loader',
-				options: {
-					presets: [['es2015', {
-						modules: false
-					}]]
-				}
-			}
-		]
+		rules: rules
 	},
 	output: {
 		path: distPath,

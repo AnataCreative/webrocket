@@ -15,6 +15,7 @@ import {watch as styleguide} from './styleguide';<% } %>
 export const watch = () => {
 	styles();
 	images();
+	video();
 	html();<% if (hasStyleguide) { %>
 	styleguide();<% } %>
 };

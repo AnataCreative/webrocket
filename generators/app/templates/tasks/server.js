@@ -24,19 +24,18 @@ const serverConfig = {
 	server: {
 		baseDir: config.root.dist,
 	},
-	tunnel: false
-};
-
-if (!isProduction()) {
-	serverConfig.middleware = [
+	open: false,
+	middleware: [
 		webpackDevMiddleware(compiler, {
-			noInfo: true,
 			publicPath: path.join('/', webpackConfig.output.publicPath),
-			stats: 'errors-only'
+			stats: {
+				colors: true
+			}
 		}),
 		webpackHotMiddleware(compiler)
-	];
-}
+	],
+	tunnel: false
+};
 
 
 export const server = () => {

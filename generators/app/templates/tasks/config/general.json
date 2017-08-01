@@ -1,5 +1,6 @@
 {
 	"root": {
+		"npm": "./",
 		"dev": "<%= devFolderPath %>",
 		"dist": "<%= distFolderPath %>"
 	},
@@ -16,7 +17,12 @@
 	"images": {
 		"dev": "img/**/*",
 		"dist": "assets/img",
-		"extensions": ".(jpg|png|svg|gif)"
+		"extensions": ".{jpg,png,svg,gif}"
+	},
+	"video": {
+		"dev": "video/**/*",
+		"dist": "assets/video",
+		"extensions": ".{mp4,webm}"
 	},
 	"html": {
 		"dev": "html/**/*",
@@ -26,6 +32,6 @@
 	"styleguide": {
 		"dev": "styleguide",
 		"dist": "assets/styleguide",
-		"extensions": ".(html,json,md,yml)"
+		"extensions": ".{html,json,md,yml}"
 	}<% } %>
 }

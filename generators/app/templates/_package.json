@@ -21,9 +21,10 @@
 
 		"gulp-imagemin": "~3.3",
 
-		"webpack": "~3.2",
-		"webpack-dev-middleware": "~1.11",
+		"webpack": "~3.4",
+		"webpack-dev-middleware": "~1.12",
 		"webpack-hot-middleware": "~2.18",
+		"webpack-module-hot-accept": "~1.0",
 
 		"babel-core": "~6.25",
 		"babel-loader": "~7.1",
