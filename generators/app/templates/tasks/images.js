@@ -5,7 +5,6 @@
 import gulp from 'gulp';
 import size from 'gulp-size';
 import changed from 'gulp-changed';
-import plumber from 'gulp-plumber';
 import imagemin from 'gulp-imagemin';
 
 import path from 'path';
@@ -18,10 +17,8 @@ const distPath = path.join(config.root.dist, config.images.dist);
 
 
 export const images = () => {
-	return gulp.src(sourceFiles)
-		// Stop Plumber
-		.pipe(plumber())
 
+	return gulp.src(sourceFiles)
 		// Only optimize changed images
 		.pipe(changed(distPath))
 
@@ -34,8 +31,10 @@ export const images = () => {
 			}]
 		}))
 
-		// Stop Plumber
-		.pipe(plumber.stop())
+			.on('error', (err) => {
+				errorLogger('Images', err.file, err.line, err.messageOriginal);
+				return done();
+			})
 
 		// Set desitination
 		.pipe(gulp.dest(distPath))

@@ -17,7 +17,7 @@ export const javascript = (callback) => {
 		if (isProduction()) {
 			webpack(webpackConfig, (err, stats) => {
 				if (err) {
-					errorLogger('Webpack', err);
+					errorLogger('Webpack', err.file, err.line, err.messageOriginal);
 				}
 
 				infoLogger('Webpack', stats.toString({

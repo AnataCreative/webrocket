@@ -5,7 +5,6 @@
 import gulp from 'gulp';
 import rename from 'gulp-rename';
 import size from 'gulp-size';
-import plumber from 'gulp-plumber';
 
 import path from 'path';
 import browserSync from 'browser-sync';
@@ -17,7 +16,7 @@ import cssMqpacker from 'css-mqpacker';
 import cssnano from 'cssnano';
 
 import config from './config/general';
-import errorLogger from './helpers/logger';
+import {errorLogger} from './helpers/logger';
 
 
 const postCssProcessors = [autoprefixer, cssMqpacker, cssnano];
@@ -28,11 +27,13 @@ const distPath = path.join(config.root.dist, config.styles.dist);
 export const styles = (done) => {
 
 	return gulp.src(sourceFiles)
-		// Start Plumber
-		.pipe(plumber())
-
 		// Sass
 		.pipe(sass())
+
+			.on('error', (err) => {
+				errorLogger('Styles', err.file, err.line, err.messageOriginal);
+				return done();
+			})
 
 		// Post CSS (prefix, combine all mediaqueries and minify)
 		.pipe(postcss(postCssProcessors))
@@ -41,9 +42,6 @@ export const styles = (done) => {
 		.pipe(rename((path) => {
 			path.basename += '.min';
 		}))
-
-		// Stop Plumber
-		.pipe(plumber.stop())
 
 		// Write to output
 		.pipe(gulp.dest(distPath))

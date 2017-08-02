@@ -28,9 +28,7 @@ const serverConfig = {
 	middleware: [
 		webpackDevMiddleware(compiler, {
 			publicPath: path.join('/', webpackConfig.output.publicPath),
-			stats: {
-				colors: true
-			}
+			stats: false
 		}),
 		webpackHotMiddleware(compiler)
 	],

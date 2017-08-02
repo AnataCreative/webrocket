@@ -8,7 +8,6 @@
 		"gulp-size": "~2.1",
 		"gulp-rename": "~1.2",
 		"gulp-util": "~3.0",
-		"gulp-plumber": "~1.1",
 		"del": "~3.0",
 		"path": "~0.12",
 		"browser-sync": "~2.18",
