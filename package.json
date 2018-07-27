@@ -1,48 +1,32 @@
 {
-	"name": "generator-webrocket",
-	"version": "0.0.4",
-	"description": "Webrocket by @AnataCreative",
-	"license": "MIT",
-	"repository": "AnataCreative/webrocket",
-	"author": {
-		"name": "Ibe Vanmeenen",
-		"email": "info@anatacreative.com",
-		"url": "anatacreative.com"
-	},
-	"main": "generators/app/index.js",
-	"engines": {
-		"node": ">=4"
-	},
-	"scripts": {
-		"test": "mocha --reporter spec --timeout 3000"
-	},
-	"files": [
-		"generators"
-	],
-	"keywords": [
-		"yeoman-generator",
-		"webrocket",
-		"web",
-		"app",
-		"gulp",
-		"webpack",
-		"scss",
-		"css",
-		"javascript",
-		"front-end"
-	],
-	"scripts": {
-		"test": "mocha --reporter spec --timeout 3000"
-	},
-	"dependencies": {
-		"yeoman-generator": "^1.1.1",
-		"chalk": "^2.0.1",
-		"yosay": "^2.0.0",
-		"generator-mocha": "^1.0.0"
-	},
-	"devDependencies": {
-		"mocha": "^3.1.0",
-		"yeoman-assert": "^3.0.0",
-		"yeoman-test": "^1.6.0"
-	}
+  "name": "generator-webrocket",
+  "version": "0.0.5",
+  "description": "Webrocket by @AnataCreative",
+  "license": "MIT",
+  "repository": "AnataCreative/webrocket",
+  "author": {
+    "name": "Ibe Vanmeenen",
+    "email": "info@anatacreative.com",
+    "url": "https://anatacreative.com"
+  },
+  "main": "generators/app/index.js",
+  "engines": {
+    "node": ">=6"
+  },
+  "files": ["generators"],
+  "keywords": ["yeoman-generator", "webrocket", "web", "app", "gulp", "webpack", "scss", "css", "javascript", "front-end"],
+  "scripts": {
+    "test": "mocha --reporter spec --timeout 3000"
+  },
+  "dependencies": {
+    "yeoman-generator": "~3.1",
+    "chalk": "~2.4",
+    "yosay": "~2.0",
+    "generator-mocha": "~2.0"
+  },
+  "devDependencies": {
+    "mocha": "~5.2.0",
+    "yeoman-assert": "~3.1",
+    "yeoman-test": "~1.8"
+  }
 }

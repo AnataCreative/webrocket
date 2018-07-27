@@ -1,15 +1,13 @@
-import gulp from 'gulp';
-
 import clean from './clean';
-import styles from './styles';
-import javascript from './javascript';
+import html from './html';
 import images from './images';
-import video from './video';
-import html from './html';<% if (hasStyleguide) { %>
-import styleguide from './styleguide';<% } %>
-
+import javascript from './javascript';
 import server from './server';
+import styleguide from './styleguide';
+import styles from './styles';
+import video from './video';
 import watch from './watch';
+import gulp from 'gulp';
 
 
 export const dev = gulp.series(clean, gulp.parallel(styles, javascript, images, video), html,<% if (hasStyleguide) { %> styleguide,<% } %> server, watch);

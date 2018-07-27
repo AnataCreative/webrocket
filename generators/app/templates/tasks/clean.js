@@ -1,19 +1,14 @@
 /**
  * Clean
  */
-
-import gulp from 'gulp';
-import del from 'del';
-
 import config from './config/general';
+import del from 'del';
 
 
 export const clean = () => {
-
-	return del(config.root.dist, {
-		force: true
-	});
+  return del(config.root.dist, {
+    force: true
+  });
 };
-
 
 export default clean;
