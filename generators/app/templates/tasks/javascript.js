@@ -1,3 +1,6 @@
+/**
+ * Javascript
+ */
 import webpackConfig from './config/webpack';
 import isProduction from './helpers/build';
 import { errorLogger, infoLogger } from './helpers/logger';

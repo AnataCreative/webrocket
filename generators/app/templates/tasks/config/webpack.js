@@ -6,25 +6,7 @@ import webpack from 'webpack';
 const sourcePath = path.resolve(config.root.dev, config.javascript.dev);
 const distPath = path.resolve(config.root.dist, config.javascript.dist);
 
-const plugins = [
-  new webpack.NoEmitOnErrorsPlugin(),
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'vendor',
-    filename: 'vendors.min.js'
-  })
-];
-
-if (isProduction()) {
-  plugins.push(
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    })
-  );
-} else {
-  plugins.push(new webpack.HotModuleReplacementPlugin());
-}
+const plugins = [new webpack.NoEmitOnErrorsPlugin()];
 
 const rules = [
   {
@@ -54,20 +36,31 @@ if (!isProduction()) {
 
 const entry = [path.resolve(config.root.dev, './js/app.js')];
 
-if (!isProduction()) {
-  entry.push('webpack-hot-middleware/client?reload=true');
-}
-
 const webpackConfig = {
   cache: false,
   entry: entry,
+  mode: isProduction() ? 'development' : 'production',
   module: {
     rules: rules
   },
   output: {
+    filename: '[name].bundle.js',
     path: distPath,
-    filename: 'app.min.js',
-    publicPath: config.javascript.dist
+    chunkFilename: '[name].bundle.js',
+    publicPath: 'assets/' + config.javascript.dist
+  },
+  optimization: {
+    minimize: isProduction(),
+    splitChunks: {
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendors',
+          enforce: true,
+          chunks: 'all'
+        }
+      }
+    }
   },
   resolve: {
     modules: [sourcePath, 'node_modules'],
