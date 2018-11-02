@@ -1,6 +1,3 @@
-/**
- * CSS
- */
 import config from './config/general';
 import { errorLogger } from './helpers/logger';
 import autoprefixer from 'autoprefixer';
@@ -14,50 +11,41 @@ import sass from 'gulp-sass';
 import size from 'gulp-size';
 import path from 'path';
 
-
 const postCssProcessors = [autoprefixer, cssMqpacker, cssnano];
 const sourceFiles = path.join(config.root.dev, config.styles.dev) + config.styles.extensions;
 const distPath = path.join(config.root.dist, config.styles.dist);
 
 export const styles = done => {
-  return (
-    gulp
-      .src(sourceFiles)
-      // Sass
-      .pipe(sass())
+  return gulp
+    .src(sourceFiles)
+    .pipe(sass())
 
-      .on('error', err => {
-        errorLogger('Styles', err.file, err.line, err.messageOriginal);
-        return done();
+    .on('error', err => {
+      errorLogger('Styles', err.file, err.line, err.messageOriginal);
+      return done();
+    })
+
+    .pipe(postcss(postCssProcessors))
+
+    .pipe(
+      rename(path => {
+        path.basename += '.min';
       })
+    )
 
-      // Post CSS (prefix, combine all mediaqueries and minify)
-      .pipe(postcss(postCssProcessors))
+    .pipe(gulp.dest(distPath))
 
-      // Rename the file to respect naming covention.
-      .pipe(
-        rename(path => {
-          path.basename += '.min';
-        })
-      )
+    .pipe(
+      size({
+        title: 'css'
+      })
+    )
 
-      // Write to output
-      .pipe(gulp.dest(distPath))
-
-      // Show total size of css
-      .pipe(
-        size({
-          title: 'css'
-        })
-      )
-
-      // Reload
-      .pipe(
-        browserSync.reload({
-          stream: true
-        })
-      )
-  );
+    .pipe(
+      browserSync.reload({
+        stream: true
+      })
+    );
 };
 
 export const watch = () => {

@@ -18,16 +18,6 @@
     "dev": "img/**/*",
     "dist": "assets/img",
     "extensions": ".{jpg,png,svg,gif}"
-  },
-  "video": {
-    "dev": "video/**/*",
-    "dist": "assets/video",
-    "extensions": ".{mp4,webm}"
-  },
-  "html": {
-    "dev": "html/**/*",
-    "dist": "./",
-    "extensions": ".html"
   }<% if (hasStyleguide) { %>,
   "styleguide": {
     "dev": "styleguide",

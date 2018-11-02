@@ -1,16 +1,16 @@
 {
-    "undef": true,
-    "unused": false,
+  "undef": true,
+  "unused": false,
 
-    "strict": false,
-    "camelcase": true,
+  "strict": false,
+  "camelcase": true,
 
-    "browser": true,
-    "esversion": 6,
+  "browser": true,
+  "esversion": 6,
 
-    "globals": {
-        "<%= appName %>": true,
-        "console": true,
-        "Promise": true
-    }
+  "globals": {
+    "<%= appName %>": true,
+    "console": true,
+    "Promise": true
+  }
 }

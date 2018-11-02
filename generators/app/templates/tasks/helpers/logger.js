@@ -1,8 +1,4 @@
-/**
- * Throw error
- */
 import gutil from 'gulp-util';
-
 
 const errorLogger = (taskName, file, line, msg) => {
   gutil.log(

@@ -1,16 +1,11 @@
-/**
- * Configuration for Webpack.
- */
 import isProduction from '../helpers/build';
 import config from './general';
 import path from 'path';
 import webpack from 'webpack';
 
-
 const sourcePath = path.resolve(config.root.dev, config.javascript.dev);
 const distPath = path.resolve(config.root.dist, config.javascript.dist);
 
-// Plugins
 const plugins = [
   new webpack.NoEmitOnErrorsPlugin(),
   new webpack.optimize.CommonsChunkPlugin({
@@ -31,7 +26,6 @@ if (isProduction()) {
   plugins.push(new webpack.HotModuleReplacementPlugin());
 }
 
-// Rules
 const rules = [
   {
     test: /\.js$/,
@@ -58,14 +52,12 @@ if (!isProduction()) {
   });
 }
 
-// Entry
 const entry = [path.resolve(config.root.dev, './js/app.js')];
 
 if (!isProduction()) {
   entry.push('webpack-hot-middleware/client?reload=true');
 }
 
-// Set Config
 const webpackConfig = {
   cache: false,
   entry: entry,
