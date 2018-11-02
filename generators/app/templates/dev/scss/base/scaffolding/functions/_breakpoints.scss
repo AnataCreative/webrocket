@@ -5,83 +5,71 @@
 /* Next
    ========================================================================== */
 @function breakpoint-next($name, $breakpoints: $grid-breakpoints, $breakpoint-names: map-keys($breakpoints)) {
-    $n: index($breakpoint-names, $name);
+  $n: index($breakpoint-names, $name);
 
-    @return if($n < length($breakpoint-names), nth($breakpoint-names, $n + 1), null);
+  @return if($n < length($breakpoint-names), nth($breakpoint-names, $n + 1), null);
 }
-
-
 
 /* Min
    ========================================================================== */
 @function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
-    $min: map-get($breakpoints, $name);
+  $min: map-get($breakpoints, $name);
 
-    @return if($min != 0, $min, null);
+  @return if($min != 0, $min, null);
 }
-
-
 
 /* Max
    ========================================================================== */
 @function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
-    $next: breakpoint-next($name, $breakpoints);
+  $next: breakpoint-next($name, $breakpoints);
 
-    @return if($next, breakpoint-min($next, $breakpoints) - 1px, null);
+  @return if($next, breakpoint-min($next, $breakpoints) - 1px, null);
 }
-
-
 
 /* Up
    ========================================================================== */
 @mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
-    $min: breakpoint-min($name, $breakpoints);
+  $min: breakpoint-min($name, $breakpoints);
 
-    @if $min {
-        @media (min-width: $min) {
-            @content;
-        }
-    } @else {
-        @content;
+  @if $min {
+    @media (min-width: $min) {
+      @content;
     }
+  } @else {
+    @content;
+  }
 }
-
-
 
 /* Down
    ========================================================================== */
 @mixin media-breakpoint-down($name, $breakpoints: $grid-breakpoints) {
-    $max: breakpoint-max($name, $breakpoints);
+  $max: breakpoint-max($name, $breakpoints);
 
-    @if $max {
-        @media (max-width: $max) {
-            @content;
-        }
-    } @else {
-        @content;
+  @if $max {
+    @media (max-width: $max) {
+      @content;
     }
+  } @else {
+    @content;
+  }
 }
-
-
 
 /* Only
    ========================================================================== */
 @mixin media-breakpoint-only($name, $breakpoints: $grid-breakpoints) {
-    @include media-breakpoint-up($name, $breakpoints) {
-        @include media-breakpoint-down($name, $breakpoints) {
-            @content;
-        }
+  @include media-breakpoint-up($name, $breakpoints) {
+    @include media-breakpoint-down($name, $breakpoints) {
+      @content;
     }
+  }
 }
-
-
 
 /* Between
    ========================================================================== */
 @mixin media-breakpoint-between($lower, $upper, $breakpoints: $grid-breakpoints) {
-    @include media-breakpoint-up($lower, $breakpoints) {
-        @include media-breakpoint-down($upper, $breakpoints) {
-            @content;
-        }
+  @include media-breakpoint-up($lower, $breakpoints) {
+    @include media-breakpoint-down($upper, $breakpoints) {
+      @content;
     }
+  }
 }

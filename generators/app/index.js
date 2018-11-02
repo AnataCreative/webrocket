@@ -4,161 +4,144 @@ const Generator = require('yeoman-generator');
 const yosay = require('yosay');
 const chalk = require('chalk');
 
-
 module.exports = class extends Generator {
-	// STEP 1: PROMPTING
-	prompting() {
-		this.log(yosay(
-			'Welcome to the 🚀 ' + chalk.yellow('webrocket') + ' generator!\
-			Let us prep for launch commander.'
-		));
+  // STEP 1: PROMPTING YALL
+  prompting() {
+    this.log(yosay('Welcome to the 🚀 ' + chalk.yellow('webrocket') + ' generator! Let us prep for launch commander.'));
 
-		const prompts = [{
-			type: 'input',
-			name: 'name',
-			message: 'Your project name: ',
-			default: ''
-		}, {
-			type: 'confirm',
-			name: 'hasStyleguide',
-			message: 'Would you like to include a ' + chalk.green('Styleguide') + '?',
-			default: true
-		}, {
-			type: 'input',
-			name: 'devFolderPath',
-			message: 'Path for ' + chalk.green('Dev') + ':',
-			default: './dev'
-		}, {
-			type: 'input',
-			name: 'distFolderPath',
-			message: 'Path for ' + chalk.green('Dist') + ':',
-			default: './dist'
-		}, {
-			type: 'input',
-			name: 'htmlLang',
-			message: 'Language of project:',
-			default: 'en'
-		}];
+    const prompts = [
+      {
+        type: 'input',
+        name: 'name',
+        message: 'Your project name: ',
+        default: ''
+      },
+      {
+        type: 'confirm',
+        name: 'hasStyleguide',
+        message: 'Would you like to include a ' + chalk.green('Styleguide') + '?',
+        default: false
+      },
+      {
+        type: 'input',
+        name: 'devFolderPath',
+        message: 'Path for ' + chalk.green('Dev') + ':',
+        default: './dev'
+      },
+      {
+        type: 'input',
+        name: 'distFolderPath',
+        message: 'Path for ' + chalk.green('Dist') + ':',
+        default: './dist'
+      },
+      {
+        type: 'input',
+        name: 'htmlLang',
+        message: 'Language of project:',
+        default: 'en'
+      }
+    ];
 
-		return this.prompt(prompts).then(answers => {
-			this.appName = answers.name.replace(/\s+/g, '').toLowerCase();
-			this.hasStyleguide = answers.hasStyleguide;
-			this.devFolderPath = answers.devFolderPath;
-			this.distFolderPath = answers.distFolderPath;
-			this.htmlLang = answers.htmlLang;
-		});
-	}
+    return this.prompt(prompts).then(answers => {
+      this.appName = answers.name.replace(/\s+/g, '').toLowerCase();
+      this.hasStyleguide = answers.hasStyleguide;
+      this.devFolderPath = answers.devFolderPath;
+      this.distFolderPath = answers.distFolderPath;
+      this.htmlLang = answers.htmlLang;
+    });
+  }
 
+  // STEP 2: WRITING A NOVAL
+  writing() {
+    this._writingPackageJSON();
+    this._writingGit();
+    this._writingEditorConfig();
+    this._writingPrettierConfig();
+    this._writingJshintrc();
 
-	// STEP 2: WRITING
-	writing() {
-		this._writingPackageJSON();
-		this._writingGit();
-		this._writingEditorConfig();
-		this._writingJshintrc();
+    this._writingTasks();
+    this._writingDev();
 
-		this._writingTasks();
-		this._writingDev();
+    if (this.hasStyleguide) {
+      this._writingStyleguide();
+    }
+  }
 
-		if (this.hasStyleguide) {
-			this._writingStyleguide();
-		}
-	}
+  _writingPackageJSON() {
+    this.fs.copyTpl(this.templatePath('_package.json'), this.destinationPath('package.json'), {
+      appName: this.appName,
+      hasStyleguide: this.hasStyleguide
+    });
+  }
 
-	_writingPackageJSON() {
-		this.fs.copyTpl(
-			this.templatePath('_package.json'),
-			this.destinationPath('package.json'), {
-				appName: this.appName,
-				hasStyleguide: this.hasStyleguide
-			}
-		);
-	}
+  _writingGit() {
+    this.fs.copy(this.templatePath('_gitignore'), this.destinationPath('.gitignore'));
+  }
 
-	_writingGit() {
-		this.fs.copy(
-			this.templatePath('_gitignore'),
-			this.destinationPath('.gitignore')
-		);
-	}
+  _writingEditorConfig() {
+    this.fs.copy(this.templatePath('_editorconfig'), this.destinationPath('.editorconfig'));
+  }
 
-	_writingEditorConfig() {
-		this.fs.copy(
-			this.templatePath('_editorconfig'),
-			this.destinationPath('.editorconfig')
-		);
-	}
+  _writingPrettierConfig() {
+    this.fs.copy(this.templatePath('_prettierrc'), this.destinationPath('.prettierrc'));
+  }
 
-	_writingJshintrc() {
-		this.fs.copyTpl(
-			this.templatePath('_jshintrc'),
-			this.destinationPath('.jshintrc'), {
-				appName: this.appName
-			}
-		);
-	}
+  _writingJshintrc() {
+    this.fs.copyTpl(this.templatePath('_jshintrc'), this.destinationPath('.jshintrc'), {
+      appName: this.appName
+    });
+  }
 
-	_writingTasks() {
-		this.fs.copyTpl(
-			this.templatePath('tasks/**/*'),
-			this.destinationPath('./tasks'), {
-				appName: this.appName,
-				hasStyleguide: this.hasStyleguide,
-				devFolderPath: this.devFolderPath,
-				distFolderPath: this.distFolderPath
-			}
-		);
-	}
+  _writingTasks() {
+    this.fs.copyTpl(this.templatePath('tasks/**/*'), this.destinationPath('./tasks'), {
+      appName: this.appName,
+      hasStyleguide: this.hasStyleguide,
+      devFolderPath: this.devFolderPath,
+      distFolderPath: this.distFolderPath
+    });
+  }
 
-	_writingDev() {
-		this.fs.copyTpl(
-			this.templatePath('dev/**/*'),
-			this.destinationPath(this.devFolderPath), {
-				appName: this.appName,
-				hasStyleguide: this.hasStyleguide,
-				distFolderPath: this.distFolderPath,
-				htmlLang: this.htmlLang
-			}
-		);
-	}
+  _writingDev() {
+    this.fs.copyTpl(this.templatePath('dev/**/*'), this.destinationPath(this.devFolderPath), {
+      appName: this.appName,
+      hasStyleguide: this.hasStyleguide,
+      distFolderPath: this.distFolderPath,
+      htmlLang: this.htmlLang
+    });
+  }
 
-	_writingStyleguide() {
-		this.fs.copy(
-			this.templatePath('styleguide/dev/scss/styleguide.scss'),
-			this.destinationPath(this.devFolderPath + '/scss/styleguide.scss')
-		);
+  _writingStyleguide() {
+    this.fs.copy(
+      this.templatePath('styleguide/dev/scss/styleguide.scss'),
+      this.destinationPath(this.devFolderPath + '/scss/styleguide.scss')
+    );
 
-		this.fs.copy(
-			this.templatePath('styleguide/tasks/styleguide.js'),
-			this.destinationPath('./tasks/styleguide.js')
-		);
+    this.fs.copy(this.templatePath('styleguide/tasks/styleguide.js'), this.destinationPath('./tasks/styleguide.js'));
 
-		this.fs.copyTpl(
-			this.templatePath('styleguide/dev/styleguide/**/*'),
-			this.destinationPath(this.devFolderPath + '/styleguide/'), {
-				appName: this.appName
-			}
-		);
-	}
+    this.fs.copyTpl(
+      this.templatePath('styleguide/dev/styleguide/**/*'),
+      this.destinationPath(this.devFolderPath + '/styleguide/'),
+      {
+        appName: this.appName
+      }
+    );
+  }
 
+  // STEP 3: INSTALL ALL THE THINGS
+  install() {
+    this.installDependencies({
+      npm: true,
+      bower: false,
+      yarn: false,
+      skipMessage: false,
+      skipInstall: false
+    });
+  }
 
-	// STEP 3: INSTALL
-	install() {
-		this.installDependencies({
-			npm: true,
-			bower: false,
-			yarn: false,
-			skipMessage: false,
-			skipInstall: false
-		});
-	}
-
-
-	// STEP 4: END
-	end() {
-		this.log(
-			'All done! Now run ' + chalk.green('npm run dev') + ' to get started. \
-			Good luck on your journey and be brave! 🚀'
-		);
-	}
+  // STEP 4: THE END, MY FRIEND
+  end() {
+    this.log(
+      'All done! Now run ' + chalk.green('npm run dev') + ' to get started. Good luck on your journey and be brave! 🚀'
+    );
+  }
 };
