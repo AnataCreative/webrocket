@@ -1,9 +1,9 @@
 {
-	"generator-node": {
-		"promptValues": {
-			"authorName": "Ibe Vanmeenen",
-			"authorEmail": "info@anatacreative.com",
-			"authorUrl": "anatacreative.com"
-		}
-	}
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Ibe Vanmeenen",
+      "authorEmail": "info@anatacreative.com",
+      "authorUrl": "anatacreative.com"
+    }
+  }
 }

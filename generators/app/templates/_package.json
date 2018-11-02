@@ -29,7 +29,9 @@
     "babel-loader": "~7.1",
     "babel-preset-es2015": "~6.24"<% if (hasStyleguide) { %>,
 
-    "fabricator-assemble": "~1.2"<% } %>
+    "fabricator-assemble": "~1.2"<% } %><% if (hasStaticSite) { %>,
+    "@11ty/eleventy": "~0.5"
+    <% } %>
   },
   "babel": {
     "presets": [

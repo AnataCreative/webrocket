@@ -5,7 +5,7 @@ const yosay = require('yosay');
 const chalk = require('chalk');
 
 module.exports = class extends Generator {
-  // STEP 1: PROMPTING
+  // STEP 1: PROMPTING YALL
   prompting() {
     this.log(yosay('Welcome to the 🚀 ' + chalk.yellow('webrocket') + ' generator! Let us prep for launch commander.'));
 
@@ -20,7 +20,13 @@ module.exports = class extends Generator {
         type: 'confirm',
         name: 'hasStyleguide',
         message: 'Would you like to include a ' + chalk.green('Styleguide') + '?',
-        default: true
+        default: false
+      },
+      {
+        type: 'confirm',
+        name: 'hasStaticSite',
+        message: 'Would you like to include a ' + chalk.green('static site') + '?',
+        default: false
       },
       {
         type: 'input',
@@ -45,13 +51,14 @@ module.exports = class extends Generator {
     return this.prompt(prompts).then(answers => {
       this.appName = answers.name.replace(/\s+/g, '').toLowerCase();
       this.hasStyleguide = answers.hasStyleguide;
+      this.hasStaticSite = answers.hasStaticSite;
       this.devFolderPath = answers.devFolderPath;
       this.distFolderPath = answers.distFolderPath;
       this.htmlLang = answers.htmlLang;
     });
   }
 
-  // STEP 2: WRITING
+  // STEP 2: WRITING A NOVAL
   writing() {
     this._writingPackageJSON();
     this._writingGit();
@@ -127,7 +134,7 @@ module.exports = class extends Generator {
     );
   }
 
-  // STEP 3: INSTALL
+  // STEP 3: INSTALL ALL THE THINGS
   install() {
     this.installDependencies({
       npm: true,
@@ -138,7 +145,7 @@ module.exports = class extends Generator {
     });
   }
 
-  // STEP 4: END
+  // STEP 4: THE END, MY FRIEND
   end() {
     this.log(
       'All done! Now run ' + chalk.green('npm run dev') + ' to get started. Good luck on your journey and be brave! 🚀'
