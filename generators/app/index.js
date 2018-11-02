@@ -23,12 +23,6 @@ module.exports = class extends Generator {
         default: false
       },
       {
-        type: 'confirm',
-        name: 'hasStaticSite',
-        message: 'Would you like to include a ' + chalk.green('static site') + '?',
-        default: false
-      },
-      {
         type: 'input',
         name: 'devFolderPath',
         message: 'Path for ' + chalk.green('Dev') + ':',
@@ -51,7 +45,6 @@ module.exports = class extends Generator {
     return this.prompt(prompts).then(answers => {
       this.appName = answers.name.replace(/\s+/g, '').toLowerCase();
       this.hasStyleguide = answers.hasStyleguide;
-      this.hasStaticSite = answers.hasStaticSite;
       this.devFolderPath = answers.devFolderPath;
       this.distFolderPath = answers.distFolderPath;
       this.htmlLang = answers.htmlLang;
