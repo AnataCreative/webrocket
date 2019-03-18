@@ -1,5 +1,0 @@
-projectName: "<%= appName %>"
-logoUrl: "../img/logo.svg"
-colors:
-    $black: "#181c21"
-    $white: "#fff"

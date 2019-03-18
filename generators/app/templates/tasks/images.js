@@ -1,4 +1,4 @@
-import config from './config/general';
+import config from './config/config';
 import gulp from 'gulp';
 import changed from 'gulp-changed';
 import imagemin from 'gulp-imagemin';

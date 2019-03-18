@@ -9,7 +9,6 @@
   "esversion": 6,
 
   "globals": {
-    "<%= appName %>": true,
     "console": true,
     "Promise": true
   }

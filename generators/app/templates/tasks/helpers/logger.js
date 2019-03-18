@@ -1,28 +1,26 @@
-import gutil from 'gulp-util';
+import log from 'fancy-log';
 
-const errorLogger = (taskName, file, line, msg) => {
-  gutil.log(
-    '[' +
-      gutil.colors.red('Error') +
-      ']' +
+export const errorLogger = (taskName = 'No taskname', file = 'No file', line = 'No line', msg = 'No msg', err) => {
+  log.error(
+    '[ Error ]' +
       '\n' +
-      gutil.colors.grey('---------------------------------------') +
+      '---------------------------------------' +
       '\n  Task: ' +
-      gutil.colors.red(taskName) +
+      taskName +
       '\n Error: ' +
-      gutil.colors.red(msg) +
+      msg +
       '\n  Line: ' +
-      gutil.colors.magenta(line) +
+      line +
       '\n  File: ' +
-      gutil.colors.magenta(file.replace(process.cwd(), '')) +
+      file.replace(process.cwd(), '') +
       '\n' +
-      gutil.colors.grey('---------------------------------------') +
+      '---------------------------------------' +
       '\n'
   );
+
+  log.error(err);
 };
 
-const infoLogger = (taskName, message) => {
-  gutil.log(taskName, gutil.colors.blue(message));
+export const infoLogger = (taskName, message) => {
+  log.info(taskName, message);
 };
-
-export { errorLogger, infoLogger };

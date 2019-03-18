@@ -1,29 +1,19 @@
-import config from './config/general';
-import webpackConfig from './config/webpack';
+import config from './config/config';
 import browserSync from 'browser-sync';
-import path from 'path';
-import webpack from 'webpack';
-import webpackDevMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
 
-const compiler = webpack(webpackConfig);
 const serverConfig = {
-  port: 8080,
+  port: 4000,
   ui: {
-    port: 8081
+    port: 4001
   },
   server: {
     baseDir: config.root.dist
   },
   open: false,
-  middleware: [
-    webpackDevMiddleware(compiler, {
-      publicPath: path.join('/', webpackConfig.output.publicPath),
-      stats: false
-    }),
-    webpackHotMiddleware(compiler)
-  ],
-  tunnel: false
+  tunnel: false,
+  notify: false,
+  ghostMode: false,
+  cors: true
 };
 
 export const server = () => {

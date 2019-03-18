@@ -7,7 +7,7 @@ const chalk = require('chalk');
 module.exports = class extends Generator {
   // STEP 1: PROMPTING YALL
   prompting() {
-    this.log(yosay('Welcome to the 🚀 ' + chalk.yellow('webrocket') + ' generator! Let us prep for launch commander.'));
+    this.log(yosay('Welcome to 🚀 ' + chalk.yellow('webrocket') + ' ! Let us prep for launch commander.'));
 
     const prompts = [
       {
@@ -15,12 +15,6 @@ module.exports = class extends Generator {
         name: 'name',
         message: 'Your project name: ',
         default: ''
-      },
-      {
-        type: 'confirm',
-        name: 'hasStyleguide',
-        message: 'Would you like to include a ' + chalk.green('Styleguide') + '?',
-        default: false
       },
       {
         type: 'input',
@@ -33,21 +27,13 @@ module.exports = class extends Generator {
         name: 'distFolderPath',
         message: 'Path for ' + chalk.green('Dist') + ':',
         default: './dist'
-      },
-      {
-        type: 'input',
-        name: 'htmlLang',
-        message: 'Language of project:',
-        default: 'en'
       }
     ];
 
     return this.prompt(prompts).then(answers => {
       this.appName = answers.name.replace(/\s+/g, '').toLowerCase();
-      this.hasStyleguide = answers.hasStyleguide;
       this.devFolderPath = answers.devFolderPath;
       this.distFolderPath = answers.distFolderPath;
-      this.htmlLang = answers.htmlLang;
     });
   }
 
@@ -58,13 +44,12 @@ module.exports = class extends Generator {
     this._writingEditorConfig();
     this._writingPrettierConfig();
     this._writingJshintrc();
+    this._writingBabelrc();
+    this._writingSitegenerator();
+    this._writingTsconfig();
 
     this._writingTasks();
     this._writingDev();
-
-    if (this.hasStyleguide) {
-      this._writingStyleguide();
-    }
   }
 
   _writingPackageJSON() {
@@ -72,6 +57,10 @@ module.exports = class extends Generator {
       appName: this.appName,
       hasStyleguide: this.hasStyleguide
     });
+  }
+
+  _writingTsconfig() {
+    this.fs.copy(this.templatePath('_tsconfig.json'), this.destinationPath('tsconfig.json'));
   }
 
   _writingGit() {
@@ -89,6 +78,17 @@ module.exports = class extends Generator {
   _writingJshintrc() {
     this.fs.copyTpl(this.templatePath('_jshintrc'), this.destinationPath('.jshintrc'), {
       appName: this.appName
+    });
+  }
+
+  _writingBabelrc() {
+    this.fs.copy(this.templatePath('_babelrc'), this.destinationPath('.babelrc'));
+  }
+
+  _writingSitegenerator() {
+    this.fs.copyTpl(this.templatePath('_eleventy.js'), this.destinationPath('.eleventy.js'), {
+      devFolderPath: this.devFolderPath,
+      distFolderPath: this.distFolderPath
     });
   }
 
@@ -110,23 +110,6 @@ module.exports = class extends Generator {
     });
   }
 
-  _writingStyleguide() {
-    this.fs.copy(
-      this.templatePath('styleguide/dev/scss/styleguide.scss'),
-      this.destinationPath(this.devFolderPath + '/scss/styleguide.scss')
-    );
-
-    this.fs.copy(this.templatePath('styleguide/tasks/styleguide.js'), this.destinationPath('./tasks/styleguide.js'));
-
-    this.fs.copyTpl(
-      this.templatePath('styleguide/dev/styleguide/**/*'),
-      this.destinationPath(this.devFolderPath + '/styleguide/'),
-      {
-        appName: this.appName
-      }
-    );
-  }
-
   // STEP 3: INSTALL ALL THE THINGS
   install() {
     this.installDependencies({
@@ -141,7 +124,7 @@ module.exports = class extends Generator {
   // STEP 4: THE END, MY FRIEND
   end() {
     this.log(
-      'All done! Now run ' + chalk.green('npm run dev') + ' to get started. Good luck on your journey and be brave! 🚀'
+      'All done! Now run ' + chalk.green('npm start') + ' to get started. Good luck on your journey and be brave! 🚀'
     );
   }
 };

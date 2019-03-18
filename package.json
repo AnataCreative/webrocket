@@ -1,6 +1,6 @@
 {
   "name": "generator-webrocket",
-  "version": "0.0.5",
+  "version": "0.1.0",
   "description": "Webrocket by @AnataCreative",
   "license": "MIT",
   "repository": "AnataCreative/webrocket",
@@ -15,18 +15,13 @@
   },
   "files": ["generators"],
   "keywords": ["yeoman-generator", "webrocket", "web", "app", "gulp", "webpack", "scss", "css", "javascript", "front-end"],
-  "scripts": {
-    "test": "mocha --reporter spec --timeout 3000"
-  },
   "dependencies": {
-    "yeoman-generator": "~3.1",
+    "yeoman-generator": "~3.2",
     "chalk": "~2.4",
     "yosay": "~2.0",
     "generator-mocha": "~2.0"
   },
   "devDependencies": {
-    "mocha": "~5.2.0",
-    "yeoman-assert": "~3.1",
-    "yeoman-test": "~1.8"
+    "yeoman-assert": "~3.1"
   }
 }

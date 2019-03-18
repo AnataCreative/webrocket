@@ -1,4 +1,4 @@
-import config from './config/general';
+import config from './config/config';
 import del from 'del';
 
 export const clean = () => {
